@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Identity2Example.Models;
 using System.Net.Mail;
+using System.Web.Configuration;
 
 namespace Identity2Example
 {
@@ -20,19 +21,22 @@ namespace Identity2Example
         public Task SendAsync(IdentityMessage message)
         {
             // настройка логина, пароля отправителя
-            var from = "lirikvolirvag@yandex.ru";
-            var pass = "vol254244";
+            // Настраивается в файле Web.config в секции  <appSettings>
+            string mailLogin = WebConfigurationManager.AppSettings["mailLogin"];
+            string mailpass = WebConfigurationManager.AppSettings["mailpass"];
+            string smtpServer = WebConfigurationManager.AppSettings["smtpServer"];
+            int smtpPort = Convert.ToInt32(WebConfigurationManager.AppSettings["smtpPort"]);
 
             // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
-            SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
+            SmtpClient client = new SmtpClient(smtpServer, smtpPort);
 
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.Credentials = new System.Net.NetworkCredential(mailLogin, mailpass);
             client.EnableSsl = true;
 
             // создаем письмо: message.Destination - адрес получателя
-            var mail = new MailMessage(from, message.Destination);
+            var mail = new MailMessage(mailLogin, message.Destination);
             mail.Subject = message.Subject;
             mail.Body = message.Body;
             mail.IsBodyHtml = true;
