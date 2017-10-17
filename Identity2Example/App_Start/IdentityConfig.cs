@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Identity2Example.Models;
+using System.Net.Mail;
 
 namespace Identity2Example
 {
@@ -18,8 +19,25 @@ namespace Identity2Example
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Подключите здесь службу электронной почты для отправки сообщения электронной почты.
-            return Task.FromResult(0);
+            // настройка логина, пароля отправителя
+            var from = "lirikvolirvag@yandex.ru";
+            var pass = "vol254244";
+
+            // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
+            SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
+
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.EnableSsl = true;
+
+            // создаем письмо: message.Destination - адрес получателя
+            var mail = new MailMessage(from, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            return client.SendMailAsync(mail);
         }
     }
 
