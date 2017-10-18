@@ -206,7 +206,7 @@ namespace Identity2Example.Controllers
                 var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    return View("ForgotPasswordConfirmation");
+                    return View("ForgotPasswordError");
                 }
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account",
