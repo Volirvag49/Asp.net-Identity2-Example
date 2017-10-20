@@ -12,6 +12,15 @@
      <add key="smtpServer" value="smtp.yandex.ru" /> <!--Адрес smtp-сервера-->
      <add key="smtpPort" value="25" /> <!--Порт smtp-сервера-->
 ```
+### Администратор по умолчанию
+Укажите в файле `web.config` в секции `<appSettings>` логин, пароль и мэйл администратора по умолчанию.
+
+ Пример:
+ ```html
+    <add key="adminLogin" value="Admin" /><!--Логин администратора-->
+    <add key="adminPass" value="Admin1" /><!--Пароль администратора-->
+    <add key="adminMail" value="AdminMail@mail.ru" /><!--Почта администратора-->
+```
 
 # Задание
 ### Задание: 
