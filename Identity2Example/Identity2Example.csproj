@@ -190,11 +190,33 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710200425102_InitialCreate.cs" />
+    <Compile Include="Migrations\201710200425102_InitialCreate.Designer.cs">
+      <DependentUpon>201710200425102_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200630174_MigrateDB.cs" />
+    <Compile Include="Migrations\201710200630174_MigrateDB.Designer.cs">
+      <DependentUpon>201710200630174_MigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200714192_MigrateDB1.cs" />
+    <Compile Include="Migrations\201710200714192_MigrateDB1.Designer.cs">
+      <DependentUpon>201710200714192_MigrateDB1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200728578_MigrateDB2.cs" />
+    <Compile Include="Migrations\201710200728578_MigrateDB2.Designer.cs">
+      <DependentUpon>201710200728578_MigrateDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200731460_MigrateDB3.cs" />
+    <Compile Include="Migrations\201710200731460_MigrateDB3.Designer.cs">
+      <DependentUpon>201710200731460_MigrateDB3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -264,8 +286,31 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ForgotPasswordError.cshtml" />
+    <Content Include="Views\Manage\UserDetails.cshtml" />
+    <Content Include="Views\ApplicationUsers\Create.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\Manage\UserEdit.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710200425102_InitialCreate.resx">
+      <DependentUpon>201710200425102_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200630174_MigrateDB.resx">
+      <DependentUpon>201710200630174_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200714192_MigrateDB1.resx">
+      <DependentUpon>201710200714192_MigrateDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200728578_MigrateDB2.resx">
+      <DependentUpon>201710200728578_MigrateDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200731460_MigrateDB3.resx">
+      <DependentUpon>201710200731460_MigrateDB3.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

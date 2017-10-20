@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Identity2Example.Models;
+using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Identity2Example.Controllers
 {
@@ -333,8 +336,71 @@ namespace Identity2Example.Controllers
             base.Dispose(disposing);
         }
 
-#region Вспомогательные приложения
-        // Используется для защиты от XSRF-атак при добавлении внешних имен входа
+        // GET: ApplicationUsers/Details/
+        public async Task<ActionResult> UserDetails()
+        {           
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var userId = User.Identity.GetUserId();
+
+                if (userId == null)
+                {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var user = await userManager.FindByIdAsync(userId);
+               
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+            }
+        }
+
+        // GET: ApplicationUsers/Edit/5
+        public async Task<ActionResult> UserEdit(string id)
+        {
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var userId = User.Identity.GetUserId();
+                if (userId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var user = await userManager.FindByIdAsync(userId);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+            }
+        }
+
+        // POST: ApplicationUsers/Edit/5
+        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
+        // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UserEdit([Bind(Include = "FirstName,LastName,Gender,About")] ApplicationUser applicationUser)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(applicationUser).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                return View(applicationUser);
+
+            }
+        }
+
+
+        #region Вспомогательные приложения
+        //Используется для защиты от XSRF-атак при добавлении внешних имен входа
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
@@ -384,6 +450,6 @@ namespace Identity2Example.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

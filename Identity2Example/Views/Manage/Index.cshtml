@@ -23,6 +23,10 @@
             }
             ]
         </dd>
+    </dl>
+    <div id="listContainer"></div>
+
+   @*Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
     @*
     <dt>Внешние имена входа:</dt>
     <dd>
@@ -83,7 +87,18 @@
                     <input type="submit" value="Включить" class="btn btn-link" />
                     </text>
                 }
-            }*@
+            }
         </dd>
-    </dl>
+    </dl>*@
 </div>
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("#listContainer").load('@Url.Action("UserDetails")'); // Загрузка частичного представления
+           
+        });       
+    </script>
+
+}
