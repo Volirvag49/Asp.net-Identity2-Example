@@ -1,7 +1,7 @@
 # Identity2Example - Выполнение тестового задания (.Net) 
 
 # Настройки
-### Настройка почтового сервиса
+### 1. Настройка почтового сервиса
 
 Укажите в файле `web.config` в секции `<appSettings>` данные используемого почтового сервиса.
 
@@ -11,6 +11,15 @@
      <add key="mailpass" value="fakepassword" /> <!--Пароль отправителя-->
      <add key="smtpServer" value="smtp.yandex.ru" /> <!--Адрес smtp-сервера-->
      <add key="smtpPort" value="25" /> <!--Порт smtp-сервера-->
+```
+### 2. Администратор по умолчанию
+Укажите в файле `web.config` в секции `<appSettings>` логин, пароль и мэйл администратора по умолчанию.
+
+ Пример:
+ ```html
+    <add key="adminLogin" value="Admin" /><!--Логин администратора-->
+    <add key="adminPass" value="Admin1" /><!--Пароль администратора-->
+    <add key="adminMail" value="AdminMail@mail.ru" /><!--Почта администратора-->
 ```
 
 # Задание
