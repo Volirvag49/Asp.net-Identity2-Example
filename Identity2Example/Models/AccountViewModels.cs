@@ -83,6 +83,21 @@ namespace Identity2Example.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+        // Необязательные поля
+        [Display(Name = "Имя")]
+        [StringLength(50, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
+        public string FirstName { get; set; }
+        [Display(Name = "Фамилия")]
+        [StringLength(50, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Пол")]
+        public UserGender Gender { get; set; }
+
+        [Display(Name = "О себе")]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
+        public string About { get; set; }
     }
 
     public class ResetPasswordViewModel

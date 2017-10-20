@@ -87,29 +87,19 @@ namespace Identity2Example.Models
 
     public class UserDetailsViewModel
     {
-        [Required]
+        // Необязательные поля
         [Display(Name = "Имя")]
-        [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
+        [StringLength(50, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
         public string FirstName { get; set; }
-        [Required]
         [Display(Name = "Фамилия")]
-        [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
+        [StringLength(50, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
         public string LastName { get; set; }
 
-        // Дата рождения
-        //[Required]
-        //[Display(Name = "Дата рождения")]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Date)]
-        //public DateTime DOB { get; set; }
-        // Пол
-        [Required]
         [Display(Name = "Пол")]
         public UserGender Gender { get; set; }
 
-        [Required]
         [Display(Name = "О себе")]
-        [MaxLength(100, ErrorMessage = "Превышена максимальная длина записи")]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не более {1} символов.")]
         public string About { get; set; }
     }
 }

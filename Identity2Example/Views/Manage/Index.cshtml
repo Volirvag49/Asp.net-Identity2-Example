@@ -24,7 +24,9 @@
             ]
         </dd>
     </dl>
+    @* asp.net MVC5 не поддерживает @await Html.PartialAsync("UserDetails"), поэтому использую скрипт*@
     <div id="listContainer"></div>
+
 
    @*Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
     @*
@@ -91,7 +93,6 @@
         </dd>
     </dl>*@
 </div>
-
 @section scripts
 {
     <script language="javascript" type="text/javascript">

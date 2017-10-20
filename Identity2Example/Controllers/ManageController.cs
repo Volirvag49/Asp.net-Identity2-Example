@@ -359,7 +359,7 @@ namespace Identity2Example.Controllers
         }
 
         // GET: ApplicationUsers/Edit/5
-        public async Task<ActionResult> UserEdit(string id)
+        public async Task<ActionResult> UserEdit()
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
@@ -374,7 +374,10 @@ namespace Identity2Example.Controllers
                 {
                     return HttpNotFound();
                 }
-                return View(user);
+
+                UserDetailsViewModel model = new UserDetailsViewModel
+                    { FirstName = user.FirstName, LastName = user.LastName, Gender = user.Gender, About = user.About };
+                return View(model);
             }
         }
 
@@ -383,22 +386,40 @@ namespace Identity2Example.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UserEdit([Bind(Include = "FirstName,LastName,Gender,About")] ApplicationUser applicationUser)
+        public async Task<ActionResult> UserEdit([Bind(Include = "FirstName,LastName,Gender,About")] UserDetailsViewModel model)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(applicationUser).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                return View(applicationUser);
+                    var userId = User.Identity.GetUserId();
+                    if (userId == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    // Поиск пользователя
+                    ApplicationUser user = UserManager.FindById(userId);
 
+                    // Заменяем поля
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Gender = model.Gender;
+                    user.About = model.About;
+
+                    // Обновляем пользователя
+                    var result = await UserManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    AddErrors(result);
+                }
+
+                return View(model);
             }
         }
-
-
+       
         #region Вспомогательные приложения
         //Используется для защиты от XSRF-атак при добавлении внешних имен входа
         private const string XsrfKey = "XsrfId";

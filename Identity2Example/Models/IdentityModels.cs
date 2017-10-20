@@ -20,24 +20,20 @@ namespace Identity2Example.Models
         }
 
         // Your Extended Properties
+        // Имя
         [Display(Name = "Имя")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string FirstName { get; set; }
+        // Фамилия
         [Display(Name = "Фамилия")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string LastName { get; set; }
-
-        //// Дата рождения
-        //[Display(Name = "Дата рождения")]
-        //[Range(1900, 2100, ErrorMessage = "Недопустимый год")]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Date)]
-        //public DateTime DOB { get; set; }
 
         // Пол
         [Display(Name = "Пол")]      
         public UserGender Gender { get; set; }
 
+        // О себе
         [Display(Name = "О себе")]
         [MaxLength(100, ErrorMessage = "Превышена максимальная длина записи")]
         public string About { get; set; }
