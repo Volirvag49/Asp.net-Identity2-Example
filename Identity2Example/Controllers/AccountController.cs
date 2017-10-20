@@ -154,10 +154,11 @@ namespace Identity2Example.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     return await SendComfirmMail(user);
                 }
                 AddErrors(result);
@@ -195,7 +196,7 @@ namespace Identity2Example.Controllers
             {
                 // Присвоить роль после подтверждения почты или до? не знаю как лучше. пусть будет до
                 // Если мейл подтверждён,присваеваем роль полозователю
-                // await UserManager.AddToRoleAsync(userId, "user");
+                // await UserManager.AddToRoleAsync(userId, "User");
                 return View("ConfirmEmail");
             }
 

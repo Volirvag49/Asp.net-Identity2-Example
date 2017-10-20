@@ -15,6 +15,7 @@ namespace Identity2Example
             ConfigureAuth(app);
             CreateRolesandUsers();
         }
+
         // In this method we will create default User roles and Admin user for login   
         private void CreateRolesandUsers()
         {
