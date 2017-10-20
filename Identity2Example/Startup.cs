@@ -22,7 +22,7 @@ namespace Identity2Example
             ApplicationDbContext context = new ApplicationDbContext();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             // creating Creating User role    
             if (!roleManager.RoleExists("User"))
@@ -30,6 +30,7 @@ namespace Identity2Example
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                 role.Name = "User";
                 roleManager.Create(role);
+                
 
             }
 
@@ -47,16 +48,17 @@ namespace Identity2Example
                 var user = new ApplicationUser();
                 user.UserName = WebConfigurationManager.AppSettings["adminLogin"];
                 user.Email = WebConfigurationManager.AppSettings["adminMail"];
+                user.EmailConfirmed = true;
 
                 string userPass = WebConfigurationManager.AppSettings["adminPass"];
 
-                var chkUser = UserManager.Create(user, userPass);
+                var chkUser = userManager.Create(user, userPass);
 
                 //Add default User to Role Admin   
                 if (chkUser.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Admin");
-                    UserManager.AddToRole(user.Id, "User");
+                    userManager.AddToRole(user.Id, "Admin");
+                    userManager.AddToRole(user.Id, "User");
 
                 }
             }
