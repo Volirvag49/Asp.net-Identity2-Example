@@ -8,7 +8,7 @@
 
  Пример:
  ```html
-     <add key="mailLogin" value="fakemail@yandex.ru" /> <!--Логин отправителя (мэйл)-->
+     <add key="mailLogin" value="fakelogin@azure.com" /> <!--Логин отправителя (мэйл)-->
      <add key="mailpass" value="fakepassword" /> <!--Пароль отправителя-->
      <add key="smtpServer" value="smtp.yandex.ru" /> <!--Адрес smtp-сервера-->
      <add key="smtpPort" value="25" /> <!--Порт smtp-сервера-->
