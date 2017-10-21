@@ -239,6 +239,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\Identity2Example - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Identity2Example2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Identity2Example20 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Identity2Example20171021103216 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
