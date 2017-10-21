@@ -177,11 +177,14 @@ namespace Identity2Example.Controllers
             // создаем ссылку для подтверждения
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                        protocol: Request.Url.Scheme);
+
+            string dateNow = DateTime.Now.ToString("f");
+
             // отправка письма
-            await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты на Identity2Example от " + DateTime.Now,
-                        "Здраствуйте " + user.UserName + " Если вы регистрировались на сайте Identity2Example от,"+ DateTime.Now + 
-                       " то для завершения регистрации перейдите по ссылке: <a href=\""
-                                                       + callbackUrl + "\">завершить регистрацию</a>"
+            await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты на Identity2Example от " + dateNow,
+                        "Здраствуйте " + user.UserName + "! Если вы регистрировались на сайте Identity2Example от " + dateNow +
+                       ", то для завершения регистрации перейдите по ссылке: <a href=\""
+                                                       + callbackUrl + "\">Завершить регистрацию</a>."
                                                        + "</br> Если вы не совершили эти действия, вы можете спокойно проигнорировать это письмо.");
             return View("DisplayEmail");
         }
@@ -232,8 +235,11 @@ namespace Identity2Example.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account",
                     new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Восстановление доступа на Identity2Example от " + DateTime.Now,
-                    "Здраствуйте " + user.UserName +" Если вы запросили сброс пароля от "+ DateTime.Now + " то, перейдите по ссылке <a href=\"" + callbackUrl + "\">сбросить</a>"
+
+                string dateNow = DateTime.Now.ToString("f");
+
+                await UserManager.SendEmailAsync(user.Id, "Восстановление доступа на Identity2Example от " + dateNow,
+                    "Здраствуйте " + user.UserName +"! Если вы запросили сброс пароля от "+ dateNow + " то, перейдите по ссылке <a href=\"" + callbackUrl + "\">Сбросить</a>."
                     + "</br> Если вы не совершили эти действия, вы можете спокойно проигнорировать это письмо.");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");                                                        
 

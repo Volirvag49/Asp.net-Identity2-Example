@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
+﻿using Identity2Example.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Identity2Example.Models;
+using System;
 using System.Net.Mail;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 
 namespace Identity2Example
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // настройка логина, пароля отправителя
             // Настраивается в файле Web.config в секции  <appSettings>
@@ -41,8 +37,9 @@ namespace Identity2Example
             mail.Body = message.Body;
             mail.IsBodyHtml = true;
 
-            return client.SendMailAsync(mail);
+            await client.SendMailAsync(mail);
         }
+
     }
 
     public class SmsService : IIdentityMessageService
