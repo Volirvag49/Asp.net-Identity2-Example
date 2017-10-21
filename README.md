@@ -1,4 +1,5 @@
 # Identity2Example - Выполнение тестового задания (.Net) 
+Можно протестировать тут http://identity2example.azurewebsites.net
 
 # Настройки
 ### 1. Настройка почтового сервиса
