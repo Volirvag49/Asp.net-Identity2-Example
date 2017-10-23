@@ -178,7 +178,7 @@ namespace Identity2Example.Controllers
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                        protocol: Request.Url.Scheme);
 
-            string dateNow = DateTime.Now.ToString("f");
+            string dateNow = DateTime.Now.ToString("dd.MM.yyyy hh:mm");
 
             // отправка письма
             await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты на Identity2Example от " + dateNow,
@@ -236,7 +236,7 @@ namespace Identity2Example.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account",
                     new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                string dateNow = DateTime.Now.ToString("f");
+                string dateNow = DateTime.Now.ToString("dd.MM.yyyy hh:mm");
 
                 await UserManager.SendEmailAsync(user.Id, "Восстановление доступа на Identity2Example от " + dateNow,
                     "Здраствуйте " + user.UserName +"! Если вы запросили сброс пароля от "+ dateNow + " то, перейдите по ссылке <a href=\"" + callbackUrl + "\">Сбросить</a>."

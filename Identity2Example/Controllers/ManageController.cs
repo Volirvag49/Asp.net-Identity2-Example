@@ -200,7 +200,8 @@ namespace Identity2Example.Controllers
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Отправка SMS через поставщик SMS для проверки номера телефона
 
-            ViewBag.Code = code;
+           
+            ViewBag.Code = code;  // Не забыть убрать
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
