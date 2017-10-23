@@ -28,7 +28,7 @@ namespace Identity2Example.Models
 
     public class SetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать символов не менее: {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
@@ -42,12 +42,12 @@ namespace Identity2Example.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [DataType(DataType.Password)]
         [Display(Name = "Текущий пароль")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать символов не менее: {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
@@ -61,20 +61,20 @@ namespace Identity2Example.Models
 
     public class AddPhoneNumberViewModel
     {
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
+        [Phone(ErrorMessage = "Пожалуйста, введите корректный номер телефона.")]
         [Display(Name = "Номер телефона")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Код")]
         public string Code { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
+        [Phone(ErrorMessage = "Пожалуйста, введите корректный номер телефона.")]
         [Display(Name = "Номер телефона")]
         public string PhoneNumber { get; set; }
     }

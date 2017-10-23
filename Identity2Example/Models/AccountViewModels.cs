@@ -5,7 +5,7 @@ namespace Identity2Example.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
     }
@@ -25,10 +25,10 @@ namespace Identity2Example.Models
 
     public class VerifyCodeViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         public string Provider { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Код")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
@@ -41,18 +41,18 @@ namespace Identity2Example.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Логин")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
@@ -63,17 +63,17 @@ namespace Identity2Example.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [Display(Name = "Логин")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
         public string UserName { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
+        [EmailAddress(ErrorMessage = "Пожалуйста, введите корректный адрес электронной почты.")]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
@@ -102,12 +102,12 @@ namespace Identity2Example.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
+        [EmailAddress(ErrorMessage = "Пожалуйста, введите корректный адрес электронной почты.")]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
@@ -123,8 +123,8 @@ namespace Identity2Example.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Требуется поле {0}.")]
+        [EmailAddress(ErrorMessage = "Пожалуйста, введите корректный адрес электронной почты.")]
         [Display(Name = "Почта")]
         public string Email { get; set; }
     }

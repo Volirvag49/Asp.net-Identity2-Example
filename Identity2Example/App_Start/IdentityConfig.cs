@@ -38,6 +38,7 @@ namespace Identity2Example
             mail.IsBodyHtml = true;
 
             await client.SendMailAsync(mail);
+
         }
 
     }
