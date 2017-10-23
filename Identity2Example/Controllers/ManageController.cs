@@ -130,7 +130,8 @@ namespace Identity2Example.Controllers
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+
+            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number});
         }
 
         //
@@ -169,6 +170,8 @@ namespace Identity2Example.Controllers
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Отправка SMS через поставщик SMS для проверки номера телефона
+
+            ViewBag.Code = code;
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 

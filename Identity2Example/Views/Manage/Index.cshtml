@@ -15,6 +15,7 @@
             [
             @if (Model.HasPassword)
             {
+
                 @Html.ActionLink("Смена пароля", "ChangePassword")
             }
             else
@@ -23,47 +24,45 @@
             }
             ]
         </dd>
+        <dt>Номер телефона:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "Нет") 
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                @Html.ActionLink("Изменить", "AddPhoneNumber")
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Удалить" class="btn-link" />
+                }
+
+            }
+            else
+            {
+                @Html.ActionLink("Добавить", "AddPhoneNumber")
+            }
+        </dd>
     </dl>
-    @* asp.net MVC5 не поддерживает @await Html.PartialAsync("UserDetails"), поэтому использую скрипт*@
-    <div id="listContainer"></div>
+        @* asp.net MVC5 не поддерживает @await Html.PartialAsync("UserDetails"), поэтому использую скрипт*@
+        <div id="listContainer"></div>
 
 
-   @*Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
-    @*
-    <dt>Внешние имена входа:</dt>
-    <dd>
-        @Model.Logins.Count [
-        @Html.ActionLink("Управление", "ManageLogins") ]
-    </dd>
-
-        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-
-         See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-
-         Uncomment the following block after you have set up two-factor authentication
-    *@
-        @*  
-            <dt>Номер телефона:</dt>
+        @*Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+        @*
+            <dt>Внешние имена входа:</dt>
             <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
+                @Model.Logins.Count [
+                @Html.ActionLink("Управление", "ManageLogins") ]
             </dd>
-        *@
-    @*
+
+                Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                 See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                 Uncomment the following block after you have set up two-factor authentication
+
     <dt>Двухфакторная проверка подлинности:</dt>
     <dd>
         <p>

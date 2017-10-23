@@ -3,12 +3,12 @@
 @{
     Layout = null;
 }
-
-
+<h4>Дополнительная информация</h4>
+<hr />
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName):
         </dt>
 
         <dd>
@@ -16,7 +16,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.LastName):
         </dt>
 
         <dd>
@@ -24,7 +24,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.Gender):
         </dt>
 
         <dd>
@@ -32,22 +32,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.About)
+            @Html.DisplayNameFor(model => model.About):
         </dt>
 
         <dd>
             @Html.DisplayTextFor(model => model.About)
-        </dd>
-        <dt> 
-        </dt>
-        <dd>
-            [
-            @Html.ActionLink("Редактировать", "UserEdit")
-            ]
-        </dd>
-        
+        </dd>  
     </dl>
-
+    [
+    @Html.ActionLink("Редактировать", "UserEdit")
+    ]    
 </div>
 <p>
 

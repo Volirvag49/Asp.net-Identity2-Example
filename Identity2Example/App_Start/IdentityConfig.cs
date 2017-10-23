@@ -9,6 +9,9 @@ using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Configuration;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace Identity2Example
 {
@@ -45,15 +48,27 @@ namespace Identity2Example
 
     public class SmsService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Подключите здесь службу SMS, чтобы отправить текстовое сообщение.
-            return Task.FromResult(0);
+            string accountSid = WebConfigurationManager.AppSettings["accountSid"];
+
+            string authToken = WebConfigurationManager.AppSettings["authToken"];
+
+            string twilioPhoneNumber = WebConfigurationManager.AppSettings["twilioPhoneNumber"];
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var messageToSend = await MessageResource.CreateAsync(
+                from: new PhoneNumber(twilioPhoneNumber),
+                to: new PhoneNumber(message.Destination),
+                body: message.Body);
+
+            await Task.FromResult(0);
         }
     }
 
-    // Настройка диспетчера пользователей приложения. UserManager определяется в ASP.NET Identity и используется приложением.
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+        // Настройка диспетчера пользователей приложения. UserManager определяется в ASP.NET Identity и используется приложением.
+        public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
