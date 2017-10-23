@@ -13,8 +13,22 @@
      <add key="smtpServer" value="smtp.yandex.ru" /> <!--Адрес smtp-сервера-->
      <add key="smtpPort" value="25" /> <!--Порт smtp-сервера-->
 ```
-В качестве почтового сервиса рекомендую 
-### 2. Администратор по умолчанию
+### 2. Настройка подтверждения телефона
+
+Укажите в файле `web.config` в секции `<appSettings>` данные используемого смс сервиса.
+
+ Пример:
+ ```html
+      <!--Настройка SmsService-->
+    <add key="accountSid" value="fakesid" /><!-- sid акаунта-->
+    <add key="authToken" value="faketoken" /><!--Ключ-->
+    <add key="twilioPhoneNumber" value="fakephonenumber" /><!--twilio номер-->
+```
+ В  GET-методе `VerifyPhoneNumber`контроллера `Manage` не забыть убрать строчку 
+ "`ViewBag.Code = code;`" тоже самое для его представления "`Ваш код будет: @ViewBag.Code (Для теста)`"
+ Данный `ViewBag.Code` отображает код, который будет отправлен по смс пользователю исключительно для теста.
+### 3. Администратор по умолчанию
+
 Укажите в файле `web.config` в секции `<appSettings>` логин, пароль и мэйл администратора по умолчанию.
 
  Пример:
