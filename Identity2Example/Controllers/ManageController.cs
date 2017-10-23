@@ -60,6 +60,7 @@ namespace Identity2Example.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
                 : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
+                : message == ManageMessageId.UpdateUserDetails ? "Выши данные были изменены."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Настроен поставщик двухфакторной проверки подлинности."
                 : message == ManageMessageId.Error ? "Произошла ошибка."
                 : message == ManageMessageId.AddPhoneSuccess ? "Ваш номер телефона добавлен."
@@ -414,7 +415,7 @@ namespace Identity2Example.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { Message = ManageMessageId.UpdateUserDetails });
                     }
                     AddErrors(result);
                 }
@@ -467,6 +468,7 @@ namespace Identity2Example.Controllers
         {
             AddPhoneSuccess,
             ChangePasswordSuccess,
+            UpdateUserDetails,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
