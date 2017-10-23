@@ -57,15 +57,43 @@ namespace Identity2Example.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
-                : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
-                : message == ManageMessageId.UpdateUserDetails ? "Выши данные были изменены."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Настроен поставщик двухфакторной проверки подлинности."
-                : message == ManageMessageId.Error ? "Произошла ошибка."
-                : message == ManageMessageId.AddPhoneSuccess ? "Ваш номер телефона добавлен."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Ваш номер телефона удален."
-                : "";
+            //ViewBag.StatusMessage =
+            //    message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
+            //    : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
+            //    : message == ManageMessageId.UpdateUserDetails ? "Выши данные были изменены."
+            //    : message == ManageMessageId.SetTwoFactorSuccess ? "Настроен поставщик двухфакторной проверки подлинности."
+            //    : message == ManageMessageId.Error ? "Произошла ошибка."
+            //    : message == ManageMessageId.AddPhoneSuccess ? "Ваш номер телефона добавлен."
+            //    : message == ManageMessageId.RemovePhoneSuccess ? "Ваш номер телефона удален."
+            //    : "";
+
+            switch (message)
+            {
+                case ManageMessageId.ChangePasswordSuccess:
+                    ViewBag.StatusMessage = "Ваш пароль изменен.";
+                    break;
+                case ManageMessageId.SetPasswordSuccess:
+                    ViewBag.StatusMessage = "Пароль задан.";
+                    break;
+                case ManageMessageId.UpdateUserDetails:
+                    ViewBag.StatusMessage = "Выши данные были изменены.";
+                    break;
+                case ManageMessageId.SetTwoFactorSuccess:
+                    ViewBag.StatusMessage = "Настроен поставщик двухфакторной проверки подлинности.";
+                    break;
+                case ManageMessageId.Error:
+                    ViewBag.StatusMessage = "Произошла ошибка.";
+                    break;
+                case ManageMessageId.AddPhoneSuccess:
+                    ViewBag.StatusMessage = "Ваш номер телефона добавлен.";
+                    break;
+                case ManageMessageId.RemovePhoneSuccess:
+                    ViewBag.StatusMessage = "Ваш номер телефона удален.";
+                    break;
+                default:
+                    ViewBag.StatusMessage = "";
+                    break;
+            }
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
